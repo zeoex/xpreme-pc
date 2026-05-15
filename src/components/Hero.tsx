@@ -25,7 +25,7 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative min-h-screen flex items-center pt-16 overflow-hidden"
-      style={{ background: "hsl(270,40%,97%)" }}
+      style={{ background: "transparent" }}
     >
       {/* Glow sutil para profundidad */}
       <div className="absolute inset-0 pointer-events-none">

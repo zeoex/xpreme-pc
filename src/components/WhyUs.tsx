@@ -36,7 +36,7 @@ const features = [
 
 export default function WhyUs() {
   return (
-    <section id="porqueelegirnos" className="py-24 bg-background">
+    <section id="porqueelegirnos" className="py-24 bg-background/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-16">

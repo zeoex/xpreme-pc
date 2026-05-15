@@ -70,7 +70,9 @@
 ::-webkit-scrollbar-thumb { background: hsla(263,75%,55%,0.4); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: hsla(263,75%,55%,0.7); }
 
-html { scroll-behavior: smooth; }
+/* El color base va en html; body y main son transparentes para que el canvas fixed se vea */
+html { scroll-behavior: smooth; background: hsl(var(--background)); }
+body { background: transparent !important; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }

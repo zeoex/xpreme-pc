@@ -11,7 +11,7 @@ import MatrixRain from "@/components/MatrixRain";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background">
+    <main className="relative min-h-screen">
       {/* Matrix rain fija en todo el fondo de la página */}
       <MatrixRain />
 
