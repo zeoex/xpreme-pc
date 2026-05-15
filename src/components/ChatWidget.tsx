@@ -250,11 +250,6 @@ export default function ChatWidget() {
             onClick={() => setOpen(true)}
             style={{
               animation: "chatBotFloat 3.2s ease-in-out infinite, chatGlow 2.5s ease-in-out infinite",
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.72)",
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
