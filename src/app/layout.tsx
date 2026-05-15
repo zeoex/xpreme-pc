@@ -10,7 +10,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        {/* Aplica el tema antes de que React hidrate — evita flash */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            var t = localStorage.getItem('xpreme-theme');
+            if (t !== 'light') document.documentElement.classList.add('dark');
+          })();
+        `}} />
+      </head>
       <body className="antialiased">{children}</body>
     </html>
   );

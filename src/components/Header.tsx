@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, X, Zap } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -52,6 +53,7 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <ThemeToggle />
           <a
             href="#contacto"
             className={cn(buttonVariants({ size: "sm" }), "bg-primary text-white hover:bg-primary/90")}

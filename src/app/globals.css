@@ -2,28 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── LIGHT MODE (default) ── */
 @layer base {
   :root {
-    --background: 224 71% 4%;
-    --foreground: 210 40% 96%;
-    --card: 222 47% 6%;
-    --card-foreground: 210 40% 96%;
-    --popover: 222 47% 6%;
-    --popover-foreground: 210 40% 96%;
-    --primary: 199 89% 48%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 32% 12%;
-    --secondary-foreground: 210 40% 96%;
-    --muted: 217 32% 12%;
-    --muted-foreground: 215 20% 55%;
-    --accent: 199 89% 48%;
+    --background:        0 0% 97%;
+    --foreground:        271 40% 10%;
+    --card:              0 0% 100%;
+    --card-foreground:   271 40% 10%;
+    --popover:           0 0% 100%;
+    --popover-foreground:271 40% 10%;
+    --primary:           271 60% 52%;   /* morado del robot */
+    --primary-foreground:0 0% 100%;
+    --secondary:         271 20% 92%;
+    --secondary-foreground:271 35% 15%;
+    --muted:             271 15% 92%;
+    --muted-foreground:  271 12% 45%;
+    --accent:            25 95% 55%;    /* naranja del robot */
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 210 40% 96%;
-    --border: 217 32% 15%;
-    --input: 217 32% 12%;
-    --ring: 199 89% 48%;
-    --radius: 0.5rem;
+    --destructive:       0 84% 60%;
+    --destructive-foreground:0 0% 100%;
+    --border:            271 20% 84%;
+    --input:             271 20% 88%;
+    --ring:              271 60% 52%;
+    --radius:            0.5rem;
+  }
+
+  /* ── DARK MODE ── */
+  .dark {
+    --background:        224 71% 4%;
+    --foreground:        210 40% 96%;
+    --card:              265 35% 7%;
+    --card-foreground:   210 40% 96%;
+    --popover:           265 35% 7%;
+    --popover-foreground:210 40% 96%;
+    --primary:           271 65% 65%;   /* morado brillante */
+    --primary-foreground:0 0% 100%;
+    --secondary:         265 30% 13%;
+    --secondary-foreground:210 40% 96%;
+    --muted:             265 30% 13%;
+    --muted-foreground:  265 15% 55%;
+    --accent:            25 95% 58%;    /* naranja del robot */
+    --accent-foreground: 0 0% 100%;
+    --destructive:       0 62% 50%;
+    --destructive-foreground:210 40% 96%;
+    --border:            265 25% 16%;
+    --input:             265 30% 13%;
+    --ring:              271 65% 65%;
+    --radius:            0.5rem;
   }
 }
 
@@ -35,21 +60,23 @@
   }
 }
 
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--background)); }
+::-webkit-scrollbar-thumb { background: hsla(271,60%,52%,0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsla(271,60%,52%,0.7); }
+
+/* ── Circuit background (hero) ── */
 .circuit-bg {
-  background-color: hsl(224 71% 4%);
+  background-color: hsl(var(--background));
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, hsla(199, 89%, 48%, 0.12), transparent),
-    linear-gradient(hsla(199, 89%, 48%, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, hsla(199, 89%, 48%, 0.035) 1px, transparent 1px);
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsla(271,60%,52%,0.12), transparent),
+    linear-gradient(hsla(271,60%,52%,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsla(271,60%,52%,0.04) 1px, transparent 1px);
   background-size: 100% 100%, 48px 48px, 48px 48px;
 }
 
 html { scroll-behavior: smooth; }
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: hsl(224 71% 4%); }
-::-webkit-scrollbar-thumb { background: hsla(199, 89%, 48%, 0.35); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: hsla(199, 89%, 48%, 0.6); }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
