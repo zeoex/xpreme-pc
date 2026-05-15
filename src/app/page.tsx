@@ -7,10 +7,15 @@ import WhyUs from "@/components/WhyUs";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
+import MatrixRain from "@/components/MatrixRain";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="relative min-h-screen bg-background">
+      {/* Matrix rain fija en todo el fondo de la página */}
+      <MatrixRain />
+
+      <div className="relative" style={{ zIndex: 1 }}>
       <Header />
       <Hero />
       <ImageCarousel />
@@ -19,6 +24,7 @@ export default function Home() {
       <WhyUs />
       <Contact />
       <Footer />
+      </div>
       <ChatWidget />
     </main>
   );

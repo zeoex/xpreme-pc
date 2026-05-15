@@ -4,8 +4,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Terminal, Cpu, Server, Shield } from "lucide-react";
-import MatrixRain from "@/components/MatrixRain";
-
 const words = ["Software", "Sistemas", "Redes", "Soluciones"];
 
 export default function Hero() {
@@ -29,9 +27,6 @@ export default function Hero() {
       className="relative min-h-screen flex items-center pt-16 overflow-hidden"
       style={{ background: "hsl(270,40%,97%)" }}
     >
-      {/* Matrix rain — morado oscuro sobre fondo claro */}
-      <MatrixRain />
-
       {/* Glow sutil para profundidad */}
       <div className="absolute inset-0 pointer-events-none">
         <div
