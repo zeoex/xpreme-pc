@@ -27,15 +27,15 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative min-h-screen flex items-center pt-16 overflow-hidden"
-      style={{ background: "hsl(224,71%,4%)" }}
+      style={{ background: "hsl(268,75%,4%)" }}
     >
       {/* Matrix rain background */}
       <MatrixRain />
 
       {/* Glow blobs encima del matrix — dan profundidad */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-[140px]" style={{ background: "hsla(199,89%,48%,0.07)" }} />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "hsla(199,89%,48%,0.05)" }} />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-[140px]" style={{ background: "hsla(263,80%,58%,0.10)" }} />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "hsla(24,94%,53%,0.08)" }} />
         {/* Vignette lateral izquierda para que el texto sea legible */}
         <div className="absolute inset-y-0 left-0 w-1/2" style={{ background: "linear-gradient(to right, rgba(6,8,18,0.85) 0%, transparent 100%)" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(6,8,18,0.4) 0%, transparent 30%, transparent 70%, rgba(6,8,18,0.6) 100%)" }} />
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left: text */}
         <div className="animate-fade-up">
-          <Badge className="mb-6 text-xs font-medium px-3 py-1" style={{ background: "hsla(199,89%,48%,0.12)", color: "hsl(199,89%,60%)", border: "1px solid hsla(199,89%,48%,0.3)" }}>
+          <Badge className="mb-6 text-xs font-medium px-3 py-1" style={{ background: "hsla(263,80%,58%,0.15)", color: "hsl(263,80%,78%)", border: "1px solid hsla(263,80%,58%,0.4)" }}>
             Soluciones IT Profesionales
           </Badge>
 
@@ -54,7 +54,7 @@ export default function Hero() {
             &amp;{" "}
             <span
               className="transition-opacity duration-300"
-              style={{ color: "hsl(199,89%,48%)", opacity: visible ? 1 : 0 }}
+              style={{ color: "hsl(263,80%,72%)", opacity: visible ? 1 : 0 }}
             >
               {words[wordIdx]}
             </span>

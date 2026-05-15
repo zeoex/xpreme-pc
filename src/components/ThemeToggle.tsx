@@ -8,14 +8,20 @@ export default function ThemeToggle() {
   useEffect(() => {
     const stored = localStorage.getItem("xpreme-theme");
     const isDark = stored !== "light";
+    apply(isDark);
     setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
   }, []);
+
+  function apply(isDark: boolean) {
+    const root = document.documentElement;
+    root.classList.toggle("dark", isDark);
+    root.classList.toggle("light", !isDark);
+  }
 
   const toggle = () => {
     const next = !dark;
     setDark(next);
-    document.documentElement.classList.toggle("dark", next);
+    apply(next);
     localStorage.setItem("xpreme-theme", next ? "dark" : "light");
   };
 
@@ -23,16 +29,15 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={dark ? "Modo claro" : "Modo oscuro"}
+      title={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
       className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
       style={{
-        background: dark ? "hsla(271,65%,65%,0.15)" : "hsla(271,60%,52%,0.1)",
-        border: "1px solid hsla(271,60%,52%,0.3)",
+        background: "hsla(263,80%,62%,0.15)",
+        border: "1px solid hsla(263,80%,62%,0.35)",
         color: "hsl(var(--primary))",
       }}
     >
-      {dark
-        ? <Sun  className="w-4 h-4" />
-        : <Moon className="w-4 h-4" />}
+      {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>
   );
 }

@@ -16,7 +16,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `
           (function(){
             var t = localStorage.getItem('xpreme-theme');
-            if (t !== 'light') document.documentElement.classList.add('dark');
+            var isDark = t !== 'light';
+            document.documentElement.classList.toggle('dark', isDark);
+            document.documentElement.classList.toggle('light', !isDark);
           })();
         `}} />
       </head>

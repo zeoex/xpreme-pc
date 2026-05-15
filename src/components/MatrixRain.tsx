@@ -34,7 +34,7 @@ export default function MatrixRain() {
 
     const draw = () => {
       // Fade out old characters slowly → creates trail effect
-      ctx.fillStyle = "rgba(6,8,18,0.055)";
+      ctx.fillStyle = "rgba(4,2,14,0.055)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < drops.length; i++) {
@@ -49,21 +49,21 @@ export default function MatrixRain() {
         // Second character — bright primary blue
         if (drops[i] > 1) {
           const c2 = CHARS[Math.floor(Math.random() * CHARS.length)];
-          ctx.fillStyle = `hsla(199,89%,${brightnesses[i]}%,0.9)`;
+          ctx.fillStyle = `hsla(263,80%,${brightnesses[i]}%,0.9)`;
           ctx.fillText(c2, x, headY - FONT_SIZE);
         }
 
         // Third — mid blue
         if (drops[i] > 2) {
           const c3 = CHARS[Math.floor(Math.random() * CHARS.length)];
-          ctx.fillStyle = `hsla(199,89%,${brightnesses[i] * 0.7}%,0.6)`;
+          ctx.fillStyle = `hsla(263,80%,${brightnesses[i] * 0.7}%,0.6)`;
           ctx.fillText(c3, x, headY - FONT_SIZE * 2);
         }
 
         // Fourth — dim blue
         if (drops[i] > 3) {
           const c4 = CHARS[Math.floor(Math.random() * CHARS.length)];
-          ctx.fillStyle = `hsla(199,89%,${brightnesses[i] * 0.45}%,0.35)`;
+          ctx.fillStyle = `hsla(263,80%,${brightnesses[i] * 0.45}%,0.35)`;
           ctx.fillText(c4, x, headY - FONT_SIZE * 3);
         }
 

@@ -9,7 +9,7 @@ const slides = [
     title: "Data Centers de alta disponibilidad",
     desc: "Diseñamos y gestionamos infraestructuras críticas con redundancia total y monitoreo 24/7.",
     icon: Server,
-    accent: "hsl(199,89%,48%)",
+    accent: "hsl(263,80%,62%)",
   },
   {
     url: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=600&q=80&auto=format&fit=crop",
@@ -17,7 +17,7 @@ const slides = [
     title: "Diagnóstico y reparación especializada",
     desc: "Técnicos certificados con equipamiento profesional para cualquier componente o dispositivo.",
     icon: Database,
-    accent: "hsl(199,89%,48%)",
+    accent: "hsl(263,80%,62%)",
   },
   {
     url: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1400&h=600&q=80&auto=format&fit=crop",
@@ -25,7 +25,7 @@ const slides = [
     title: "Software a medida para tu empresa",
     desc: "Aplicaciones web, sistemas de gestión y automatizaciones diseñadas para tus procesos.",
     icon: Code2,
-    accent: "hsl(199,89%,48%)",
+    accent: "hsl(263,80%,62%)",
   },
   {
     url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=600&q=80&auto=format&fit=crop",
@@ -33,7 +33,7 @@ const slides = [
     title: "Protección total de tu información",
     desc: "Soluciones de seguridad perimetral, backups automatizados y respuesta ante incidentes.",
     icon: Shield,
-    accent: "hsl(199,89%,48%)",
+    accent: "hsl(263,80%,62%)",
   },
   {
     url: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=1400&h=600&q=80&auto=format&fit=crop",
@@ -41,7 +41,7 @@ const slides = [
     title: "Conectividad empresarial confiable",
     desc: "Instalación, configuración y soporte de redes cableadas e inalámbricas para pymes y corporaciones.",
     icon: Wifi,
-    accent: "hsl(199,89%,48%)",
+    accent: "hsl(263,80%,62%)",
   },
 ];
 
@@ -119,7 +119,7 @@ export default function ImageCarousel() {
             className="absolute inset-0 opacity-20"
             style={{
               backgroundImage:
-                "linear-gradient(hsla(199,89%,48%,0.07) 1px, transparent 1px), linear-gradient(90deg, hsla(199,89%,48%,0.07) 1px, transparent 1px)",
+                "linear-gradient(hsla(263,80%,58%,0.07) 1px, transparent 1px), linear-gradient(90deg, hsla(263,80%,58%,0.07) 1px, transparent 1px)",
               backgroundSize: "40px 40px",
             }}
           />
@@ -143,13 +143,13 @@ export default function ImageCarousel() {
             <div className="flex items-center gap-2 mb-4">
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: "hsla(199,89%,48%,0.2)", border: "1px solid hsla(199,89%,48%,0.4)" }}
+                style={{ background: "hsla(263,80%,58%,0.2)", border: "1px solid hsla(263,80%,58%,0.4)" }}
               >
                 <Icon className="w-4 h-4 text-primary" />
               </div>
               <span
                 className="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full"
-                style={{ background: "hsla(199,89%,48%,0.15)", color: "hsl(199,89%,60%)", border: "1px solid hsla(199,89%,48%,0.3)" }}
+                style={{ background: "hsla(263,80%,58%,0.15)", color: "hsl(263,80%,78%)", border: "1px solid hsla(263,80%,58%,0.3)" }}
               >
                 {slide.tag}
               </span>
@@ -175,7 +175,7 @@ export default function ImageCarousel() {
         onClick={prev}
         aria-label="Anterior"
         className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
-        style={{ background: "rgba(6,8,18,0.65)", border: "1px solid hsla(199,89%,48%,0.3)", color: "white" }}
+        style={{ background: "rgba(6,8,18,0.65)", border: "1px solid hsla(263,80%,58%,0.3)", color: "white" }}
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -183,7 +183,7 @@ export default function ImageCarousel() {
         onClick={next}
         aria-label="Siguiente"
         className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
-        style={{ background: "rgba(6,8,18,0.65)", border: "1px solid hsla(199,89%,48%,0.3)", color: "white" }}
+        style={{ background: "rgba(6,8,18,0.65)", border: "1px solid hsla(263,80%,58%,0.3)", color: "white" }}
       >
         <ChevronRight className="w-5 h-5" />
       </button>
@@ -200,7 +200,7 @@ export default function ImageCarousel() {
               width: i === current ? "28px" : "8px",
               height: "8px",
               borderRadius: "4px",
-              background: i === current ? "hsl(199,89%,48%)" : "rgba(255,255,255,0.3)",
+              background: i === current ? "hsl(263,80%,62%)" : "rgba(255,255,255,0.3)",
             }}
           />
         ))}

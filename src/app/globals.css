@@ -2,80 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── LIGHT MODE (default) ── */
+/* ─────────────────────────────────────────────
+   ROBOT COLOR SYSTEM
+   Primary  : hsl(263,80%,58%)  — purple cuerpo del robot
+   Accent   : hsl(24,94%,53%)   — naranja manos/pies del robot
+   ───────────────────────────────────────────── */
+
 @layer base {
-  :root {
-    --background:        0 0% 97%;
-    --foreground:        271 40% 10%;
-    --card:              0 0% 100%;
-    --card-foreground:   271 40% 10%;
-    --popover:           0 0% 100%;
-    --popover-foreground:271 40% 10%;
-    --primary:           271 60% 52%;   /* morado del robot */
-    --primary-foreground:0 0% 100%;
-    --secondary:         271 20% 92%;
-    --secondary-foreground:271 35% 15%;
-    --muted:             271 15% 92%;
-    --muted-foreground:  271 12% 45%;
-    --accent:            25 95% 55%;    /* naranja del robot */
-    --accent-foreground: 0 0% 100%;
-    --destructive:       0 84% 60%;
+  /* ── DARK MODE (default) ── */
+  :root,
+  .dark {
+    --background:         268 75% 4%;
+    --foreground:         270 30% 95%;
+    --card:               266 55% 7%;
+    --card-foreground:    270 30% 95%;
+    --popover:            266 55% 7%;
+    --popover-foreground: 270 30% 95%;
+    --primary:            263 80% 62%;   /* morado robot */
+    --primary-foreground: 0 0% 100%;
+    --secondary:          265 40% 12%;
+    --secondary-foreground:270 30% 95%;
+    --muted:              265 40% 12%;
+    --muted-foreground:   268 20% 55%;
+    --accent:             24 94% 55%;    /* naranja robot */
+    --accent-foreground:  0 0% 100%;
+    --destructive:        0 62% 50%;
     --destructive-foreground:0 0% 100%;
-    --border:            271 20% 84%;
-    --input:             271 20% 88%;
-    --ring:              271 60% 52%;
-    --radius:            0.5rem;
+    --border:             265 30% 16%;
+    --input:              265 40% 12%;
+    --ring:               263 80% 62%;
+    --radius:             0.5rem;
   }
 
-  /* ── DARK MODE ── */
-  .dark {
-    --background:        224 71% 4%;
-    --foreground:        210 40% 96%;
-    --card:              265 35% 7%;
-    --card-foreground:   210 40% 96%;
-    --popover:           265 35% 7%;
-    --popover-foreground:210 40% 96%;
-    --primary:           271 65% 65%;   /* morado brillante */
-    --primary-foreground:0 0% 100%;
-    --secondary:         265 30% 13%;
-    --secondary-foreground:210 40% 96%;
-    --muted:             265 30% 13%;
-    --muted-foreground:  265 15% 55%;
-    --accent:            25 95% 58%;    /* naranja del robot */
-    --accent-foreground: 0 0% 100%;
-    --destructive:       0 62% 50%;
-    --destructive-foreground:210 40% 96%;
-    --border:            265 25% 16%;
-    --input:             265 30% 13%;
-    --ring:              271 65% 65%;
-    --radius:            0.5rem;
+  /* ── LIGHT MODE ── */
+  .light {
+    --background:         270 50% 97%;
+    --foreground:         268 60% 10%;
+    --card:               0 0% 100%;
+    --card-foreground:    268 60% 10%;
+    --popover:            0 0% 100%;
+    --popover-foreground: 268 60% 10%;
+    --primary:            263 75% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary:          268 30% 91%;
+    --secondary-foreground:268 50% 15%;
+    --muted:              268 25% 91%;
+    --muted-foreground:   268 15% 45%;
+    --accent:             24 94% 52%;
+    --accent-foreground:  0 0% 100%;
+    --destructive:        0 84% 60%;
+    --destructive-foreground:0 0% 100%;
+    --border:             268 20% 83%;
+    --input:              268 20% 88%;
+    --ring:               263 75% 50%;
+    --radius:             0.5rem;
   }
 }
 
 @layer base {
   * { @apply border-border; }
-  body {
-    @apply bg-background text-foreground;
-    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  }
+  body { @apply bg-background text-foreground; }
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: hsl(var(--background)); }
-::-webkit-scrollbar-thumb { background: hsla(271,60%,52%,0.4); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: hsla(271,60%,52%,0.7); }
-
-/* ── Circuit background (hero) ── */
-.circuit-bg {
-  background-color: hsl(var(--background));
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, hsla(271,60%,52%,0.12), transparent),
-    linear-gradient(hsla(271,60%,52%,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, hsla(271,60%,52%,0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 48px 48px, 48px 48px;
+::-webkit-scrollbar-thumb {
+  background: hsla(263,80%,62%,0.45);
+  border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover { background: hsla(263,80%,62%,0.7); }
 
+/* ── Animations ── */
 html { scroll-behavior: smooth; }
 
 @keyframes fadeUp {
@@ -84,5 +82,5 @@ html { scroll-behavior: smooth; }
 }
 .animate-fade-up { animation: fadeUp 0.6s ease-out both; }
 
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 .cursor-blink { animation: blink 1s step-end infinite; }

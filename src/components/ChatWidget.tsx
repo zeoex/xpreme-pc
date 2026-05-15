@@ -223,14 +223,14 @@ export default function ChatWidget() {
           100% { transform: scale(1); }
         }
         @keyframes chatGlow {
-          0%,100% { box-shadow: 0 6px 24px 4px hsla(199,89%,48%,0.35), 0 0 0 0 hsla(199,89%,48%,0); }
-          50%      { box-shadow: 0 8px 40px 12px hsla(199,89%,48%,0.65), 0 0 60px 20px hsla(199,89%,48%,0.2); }
+          0%,100% { box-shadow: 0 6px 24px 4px hsla(263,80%,62%,0.35), 0 0 0 0 hsla(263,80%,62%,0); }
+          50%      { box-shadow: 0 8px 40px 12px hsla(263,80%,62%,0.65), 0 0 60px 20px hsla(263,80%,62%,0.2); }
         }
       `}</style>
 
       {/* ── Floating button — robot mascot ── */}
       <div
-        className="fixed bottom-0 right-0 z-50 w-[220px] h-[220px] pointer-events-none"
+        className="fixed bottom-0 right-0 z-50 w-[150px] h-[150px] sm:w-[220px] sm:h-[220px] pointer-events-none"
         style={mounted ? { animation: "chatBtnIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both" } : { opacity: 0 }}
       >
         {/* Unread badge */}
@@ -246,7 +246,7 @@ export default function ChatWidget() {
         {/* Robot (visible when closed) — fuera del clip del botón para mostrarse completo */}
         {!open && (
           <div
-            className="absolute bottom-0 right-0 w-[200px] h-[200px] cursor-pointer select-none pointer-events-auto"
+            className="absolute bottom-0 right-0 w-[130px] h-[130px] sm:w-[200px] sm:h-[200px] cursor-pointer select-none pointer-events-auto"
             onClick={() => setOpen(true)}
             style={{
               animation: "chatBotFloat 3.2s ease-in-out infinite, chatGlow 2.5s ease-in-out infinite",
@@ -258,7 +258,7 @@ export default function ChatWidget() {
               src="/bot-avatar.png"
               alt="Abrir chat"
               className="w-full h-full object-contain drop-shadow-xl"
-              style={{ filter: "drop-shadow(0 4px 16px hsla(199,89%,48%,0.5))" }}
+              style={{ filter: "drop-shadow(0 4px 16px hsla(263,80%,62%,0.5))" }}
             />
           </div>
         )}
@@ -269,7 +269,7 @@ export default function ChatWidget() {
             onClick={() => setOpen(false)}
             aria-label="Cerrar chat"
             className="absolute bottom-4 right-4 z-10 w-14 h-14 rounded-full bg-primary flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto"
-            style={{ boxShadow: "0 4px 20px hsla(199,89%,48%,0.5)" }}
+            style={{ boxShadow: "0 4px 20px hsla(263,80%,62%,0.5)" }}
           >
             <ChevronDown className="w-7 h-7 text-white" />
           </button>
@@ -279,10 +279,10 @@ export default function ChatWidget() {
       {/* ── Chat panel ── */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[340px] sm:w-[380px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
+          className="fixed bottom-20 right-2 sm:right-6 z-50 w-[calc(100vw-16px)] sm:w-[380px] max-w-[420px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
           style={{
             maxHeight: "540px",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px hsla(199,89%,48%,0.08)",
+            boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px hsla(263,80%,62%,0.08)",
             animation: "chatPanelIn 0.35s cubic-bezier(0.34,1.2,0.64,1) both",
           }}
         >
@@ -360,8 +360,8 @@ export default function ChatWidget() {
               disabled={!input.trim() || loading}
               className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 active:scale-90"
               style={{
-                background: input.trim() && !loading ? "hsl(199,89%,48%)" : "hsl(217,32%,18%)",
-                boxShadow: input.trim() && !loading ? "0 4px 16px hsla(199,89%,48%,0.4)" : "none",
+                background: input.trim() && !loading ? "hsl(263,80%,62%)" : "hsl(265,30%,16%)",
+                boxShadow: input.trim() && !loading ? "0 4px 16px hsla(263,80%,62%,0.4)" : "none",
                 color: "white",
               }}
             >
