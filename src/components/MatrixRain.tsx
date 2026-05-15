@@ -21,8 +21,8 @@ export default function MatrixRain() {
     let brightnesses: number[] = [];
 
     const init = () => {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
       const cols = Math.floor(canvas.width / FS);
       drops        = Array.from({ length: cols }, () => Math.random() * -(canvas.height / FS));
       speeds       = Array.from({ length: cols }, () => 0.25 + Math.random() * 0.75);
