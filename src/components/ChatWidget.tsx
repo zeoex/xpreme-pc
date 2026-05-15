@@ -230,13 +230,13 @@ export default function ChatWidget() {
 
       {/* ── Floating button — robot mascot ── */}
       <div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-0 right-0 z-50 w-[220px] h-[220px] pointer-events-none"
         style={mounted ? { animation: "chatBtnIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both" } : { opacity: 0 }}
       >
         {/* Unread badge */}
         {unread > 0 && !open && (
           <span
-            className="absolute -top-1 -right-1 z-20 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center shadow"
+            className="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-red-500 text-white text-[11px] font-bold flex items-center justify-center shadow pointer-events-none"
             style={{ animation: "chatBadgePop 0.3s cubic-bezier(0.34,1.56,0.64,1) both" }}
           >
             {unread}
@@ -246,7 +246,7 @@ export default function ChatWidget() {
         {/* Robot (visible when closed) — fuera del clip del botón para mostrarse completo */}
         {!open && (
           <div
-            className="absolute bottom-0 right-0 w-[100px] h-[100px] cursor-pointer select-none"
+            className="absolute bottom-0 right-0 w-[200px] h-[200px] cursor-pointer select-none pointer-events-auto"
             onClick={() => setOpen(true)}
             style={{
               animation: "chatBotFloat 3.2s ease-in-out infinite, chatGlow 2.5s ease-in-out infinite",
@@ -268,7 +268,7 @@ export default function ChatWidget() {
           <button
             onClick={() => setOpen(false)}
             aria-label="Cerrar chat"
-            className="relative z-10 w-14 h-14 rounded-full bg-primary flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
+            className="absolute bottom-4 right-4 z-10 w-14 h-14 rounded-full bg-primary flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 pointer-events-auto"
             style={{ boxShadow: "0 4px 20px hsla(199,89%,48%,0.5)" }}
           >
             <ChevronDown className="w-7 h-7 text-white" />
