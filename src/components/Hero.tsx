@@ -27,23 +27,35 @@ export default function Hero() {
     <section
       id="inicio"
       className="relative min-h-screen flex items-center pt-16 overflow-hidden"
-      style={{ background: "hsl(224,71%,4%)" }}
+      style={{ background: "hsl(222,60%,7%)" }}
     >
       {/* Matrix rain background */}
       <MatrixRain />
 
-      {/* Glow blobs encima del matrix — dan profundidad */}
+      {/* Glow blobs — más intensos para dar profundidad */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-[140px]" style={{ background: "hsla(199,89%,48%,0.07)" }} />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "hsla(199,89%,48%,0.05)" }} />
-        {/* Vignette lateral izquierda para que el texto sea legible */}
-        <div className="absolute inset-y-0 left-0 w-1/2" style={{ background: "linear-gradient(to right, rgba(6,8,18,0.85) 0%, transparent 100%)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(6,8,18,0.4) 0%, transparent 30%, transparent 70%, rgba(6,8,18,0.6) 100%)" }} />
+        <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] rounded-full blur-[130px]"
+          style={{ background: "hsla(199,89%,48%,0.14)" }} />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[400px] rounded-full blur-[110px]"
+          style={{ background: "hsla(180,80%,45%,0.09)" }} />
+        {/* Franja superior y inferior — solo para suavizar bordes */}
+        <div className="absolute inset-x-0 top-0 h-24"
+          style={{ background: "linear-gradient(to bottom, hsl(222,60%,7%), transparent)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-24"
+          style={{ background: "linear-gradient(to top, hsl(222,60%,7%), transparent)" }} />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left: text */}
-        <div className="animate-fade-up">
+        <div className="animate-fade-up relative">
+          {/* Glass card detrás del texto */}
+          <div className="absolute -inset-6 rounded-2xl -z-10"
+            style={{
+              background: "rgba(8,10,28,0.65)",
+              backdropFilter: "blur(12px)",
+              border: "1px solid rgba(56,189,248,0.1)",
+              boxShadow: "0 0 60px rgba(0,0,0,0.5)",
+            }} />
           <Badge className="mb-6 text-xs font-medium px-3 py-1" style={{ background: "hsla(199,89%,48%,0.12)", color: "hsl(199,89%,60%)", border: "1px solid hsla(199,89%,48%,0.3)" }}>
             Soluciones IT Profesionales
           </Badge>
