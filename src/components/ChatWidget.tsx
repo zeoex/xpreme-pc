@@ -209,11 +209,12 @@ export default function ChatWidget() {
           to   { opacity:1; transform: translateY(0) scale(1); }
         }
         @keyframes chatBotFloat {
-          0%,100% { transform: translateY(0px); }
-          50%      { transform: translateY(-6px); }
+          0%,100% { transform: translateY(0px) rotate(-1deg); }
+          25%      { transform: translateY(-10px) rotate(1deg); }
+          75%      { transform: translateY(-5px) rotate(-0.5deg); }
         }
         @keyframes chatBtnIn {
-          from { opacity:0; transform: scale(0.5) translateY(16px); }
+          from { opacity:0; transform: scale(0.3) translateY(24px); }
           to   { opacity:1; transform: scale(1) translateY(0); }
         }
         @keyframes chatBadgePop {
@@ -222,8 +223,8 @@ export default function ChatWidget() {
           100% { transform: scale(1); }
         }
         @keyframes chatGlow {
-          0%,100% { box-shadow: 0 0 18px 4px hsla(199,89%,48%,0.3); }
-          50%      { box-shadow: 0 0 32px 10px hsla(199,89%,48%,0.55); }
+          0%,100% { box-shadow: 0 6px 24px 4px hsla(199,89%,48%,0.35), 0 0 0 0 hsla(199,89%,48%,0); }
+          50%      { box-shadow: 0 8px 40px 12px hsla(199,89%,48%,0.65), 0 0 60px 20px hsla(199,89%,48%,0.2); }
         }
       `}</style>
 
@@ -242,45 +243,43 @@ export default function ChatWidget() {
           </span>
         )}
 
-        <button
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Cerrar chat" : "Abrir chat"}
-          className="relative z-10 w-16 h-16 rounded-full bg-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden"
-          style={{
-            animation: !open ? "chatGlow 2.5s ease-in-out infinite" : "none",
-            boxShadow: open ? "0 4px 20px rgba(0,0,0,0.3)" : undefined,
-          }}
-        >
-          {/* Robot image (visible when closed) */}
-          <span
-            className="absolute inset-0 flex items-center justify-center transition-all duration-300"
+        {/* Robot (visible when closed) — fuera del clip del botón para mostrarse completo */}
+        {!open && (
+          <div
+            className="absolute bottom-0 right-0 w-[100px] h-[100px] cursor-pointer select-none"
+            onClick={() => setOpen(true)}
             style={{
-              opacity: open ? 0 : 1,
-              transform: open ? "scale(0.5) rotate(90deg)" : "scale(1) rotate(0deg)",
-              animation: !open ? "chatBotFloat 3s ease-in-out infinite" : "none",
+              animation: "chatBotFloat 3.2s ease-in-out infinite, chatGlow 2.5s ease-in-out infinite",
+              borderRadius: "50%",
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/bot-avatar.png" alt="Chat" className="w-14 h-14 object-contain" />
-          </span>
+            <img
+              src="/bot-avatar.png"
+              alt="Abrir chat"
+              className="w-full h-full object-contain drop-shadow-xl"
+              style={{ filter: "drop-shadow(0 4px 16px hsla(199,89%,48%,0.5))" }}
+            />
+          </div>
+        )}
 
-          {/* Close icon (visible when open) */}
-          <span
-            className="absolute inset-0 flex items-center justify-center transition-all duration-300"
-            style={{
-              opacity: open ? 1 : 0,
-              transform: open ? "scale(1) rotate(0deg)" : "scale(0.5) rotate(-90deg)",
-            }}
+        {/* Botón cerrar (visible cuando está abierto) */}
+        {open && (
+          <button
+            onClick={() => setOpen(false)}
+            aria-label="Cerrar chat"
+            className="relative z-10 w-14 h-14 rounded-full bg-primary flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
+            style={{ boxShadow: "0 4px 20px hsla(199,89%,48%,0.5)" }}
           >
-            <ChevronDown className="w-6 h-6 text-primary" />
-          </span>
-        </button>
+            <ChevronDown className="w-7 h-7 text-white" />
+          </button>
+        )}
       </div>
 
       {/* ── Chat panel ── */}
       {open && (
         <div
-          className="fixed bottom-28 right-6 z-50 w-[340px] sm:w-[380px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
+          className="fixed bottom-24 right-6 z-50 w-[340px] sm:w-[380px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
           style={{
             maxHeight: "540px",
             boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px hsla(199,89%,48%,0.08)",
