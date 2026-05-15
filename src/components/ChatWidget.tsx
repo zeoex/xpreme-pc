@@ -261,16 +261,18 @@ export default function ChatWidget() {
 
             {/* ── Burbuja de saludo ── */}
             <div
-              className="absolute right-[105px] sm:right-[165px] bottom-[60px] sm:bottom-[90px] z-20"
+              className="absolute right-[105px] sm:right-[165px] bottom-[105px] sm:bottom-[165px] z-20"
               style={{ animation: "chatBubbleIn 0.5s cubic-bezier(0.34,1.3,0.64,1) 1.2s both" }}
             >
               <div
-                className="relative px-3 py-2 rounded-2xl rounded-br-sm text-xs sm:text-sm font-medium whitespace-nowrap shadow-lg"
+                className="relative px-2.5 py-1.5 rounded-2xl rounded-br-sm text-[11px] sm:text-xs font-medium whitespace-nowrap shadow-lg"
                 style={{
-                  background: "hsl(0,0%,100%)",
+                  background: "hsla(0,0%,100%,0.75)",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
                   border: "1.5px solid hsla(263,75%,55%,0.3)",
                   color: "hsl(268,60%,15%)",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.10)",
                 }}
               >
                 👋 ¡Hola! Soy <strong style={{ color: "hsl(263,75%,50%)" }}>ISI</strong>
@@ -281,7 +283,7 @@ export default function ChatWidget() {
                 <span
                   className="absolute -right-[7px] bottom-2 w-3 h-3"
                   style={{
-                    background: "hsl(0,0%,100%)",
+                    background: "hsla(0,0%,100%,0.75)",
                     border: "1.5px solid hsla(263,75%,55%,0.3)",
                     borderLeft: "none",
                     borderTop: "none",
