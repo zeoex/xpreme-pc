@@ -226,6 +226,18 @@ export default function ChatWidget() {
           0%,100% { box-shadow: 0 6px 24px 4px hsla(263,80%,62%,0.35), 0 0 0 0 hsla(263,80%,62%,0); }
           50%      { box-shadow: 0 8px 40px 12px hsla(263,80%,62%,0.65), 0 0 60px 20px hsla(263,80%,62%,0.2); }
         }
+        @keyframes chatBubbleIn {
+          0%   { opacity:0; transform: scale(0.7) translateY(8px); }
+          60%  { opacity:1; transform: scale(1.04) translateY(-2px); }
+          100% { opacity:1; transform: scale(1) translateY(0); }
+        }
+        @keyframes chatPulseRing {
+          0%   { transform: scale(1);    opacity: 0.6; }
+          100% { transform: scale(1.5);  opacity: 0; }
+        }
+        @keyframes chatTyping {
+          0%,100% { opacity:1; } 50% { opacity:0; }
+        }
       `}</style>
 
       {/* ── Floating button — robot mascot ── */}
@@ -243,22 +255,74 @@ export default function ChatWidget() {
           </span>
         )}
 
-        {/* Robot (visible when closed) — fuera del clip del botón para mostrarse completo */}
+        {/* Robot (visible when closed) */}
         {!open && (
-          <div
-            className="absolute bottom-0 right-0 w-[130px] h-[130px] sm:w-[200px] sm:h-[200px] cursor-pointer select-none pointer-events-auto"
-            onClick={() => setOpen(true)}
-            style={{
-              animation: "chatBotFloat 3.2s ease-in-out infinite, chatGlow 2.5s ease-in-out infinite",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/bot-avatar.png"
-              alt="Abrir chat"
-              className="w-full h-full object-contain drop-shadow-xl"
-              style={{ filter: "drop-shadow(0 4px 16px hsla(263,80%,62%,0.5))" }}
-            />
+          <div className="absolute bottom-0 right-0 pointer-events-auto" style={{ width: "fit-content" }}>
+
+            {/* ── Burbuja de saludo ── */}
+            <div
+              className="absolute right-[105px] sm:right-[165px] bottom-[60px] sm:bottom-[90px] z-20"
+              style={{ animation: "chatBubbleIn 0.5s cubic-bezier(0.34,1.3,0.64,1) 1.2s both" }}
+            >
+              <div
+                className="relative px-3 py-2 rounded-2xl rounded-br-sm text-xs sm:text-sm font-medium whitespace-nowrap shadow-lg"
+                style={{
+                  background: "hsl(0,0%,100%)",
+                  border: "1.5px solid hsla(263,75%,55%,0.3)",
+                  color: "hsl(268,60%,15%)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.12)",
+                }}
+              >
+                👋 ¡Hola! Soy <strong style={{ color: "hsl(263,75%,50%)" }}>ISI</strong>
+                <br />
+                <span style={{ color: "hsl(268,30%,40%)" }}>¿En qué te ayudo?</span>
+                <span style={{ animation: "chatTyping 1s step-end infinite", marginLeft: 2 }}>|</span>
+                {/* Cola de la burbuja */}
+                <span
+                  className="absolute -right-[7px] bottom-2 w-3 h-3"
+                  style={{
+                    background: "hsl(0,0%,100%)",
+                    border: "1.5px solid hsla(263,75%,55%,0.3)",
+                    borderLeft: "none",
+                    borderTop: "none",
+                    transform: "rotate(-45deg)",
+                    borderRadius: "0 0 3px 0",
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* ── Anillo pulsante ── */}
+            <div
+              className="absolute bottom-[8px] sm:bottom-[14px] right-[8px] sm:right-[14px] rounded-full pointer-events-none"
+              style={{
+                width: 114, height: 114,
+                ["--sm-w" as string]: "174px",
+              }}
+            >
+              <span className="absolute inset-0 rounded-full" style={{ background: "hsla(263,80%,62%,0.25)", animation: "chatPulseRing 2s ease-out infinite" }} />
+              <span className="absolute inset-0 rounded-full" style={{ background: "hsla(263,80%,62%,0.15)", animation: "chatPulseRing 2s ease-out 0.7s infinite" }} />
+            </div>
+
+            {/* ── Robot con borde circular ── */}
+            <div
+              className="cursor-pointer select-none w-[130px] h-[130px] sm:w-[200px] sm:h-[200px] rounded-full flex items-center justify-center"
+              onClick={() => setOpen(true)}
+              style={{
+                animation: "chatBotFloat 3.2s ease-in-out infinite",
+                border: "3px solid hsla(263,80%,62%,0.6)",
+                boxShadow: "0 0 0 6px hsla(263,80%,62%,0.12), 0 8px 32px hsla(263,80%,50%,0.35)",
+                background: "hsla(263,80%,62%,0.06)",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/bot-avatar.png"
+                alt="Abrir chat"
+                className="w-[85%] h-[85%] object-contain"
+                style={{ filter: "drop-shadow(0 4px 12px hsla(263,80%,62%,0.4))" }}
+              />
+            </div>
           </div>
         )}
 
