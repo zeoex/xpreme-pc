@@ -304,23 +304,18 @@ export default function ChatWidget() {
               <span className="absolute inset-0 rounded-full" style={{ background: "hsla(263,80%,62%,0.15)", animation: "chatPulseRing 2s ease-out 0.7s infinite" }} />
             </div>
 
-            {/* ── Robot con borde circular ── */}
+            {/* ── Robot sin bordes ── */}
             <div
-              className="cursor-pointer select-none w-[130px] h-[130px] sm:w-[200px] sm:h-[200px] rounded-full flex items-center justify-center"
+              className="cursor-pointer select-none w-[130px] h-[130px] sm:w-[200px] sm:h-[200px]"
               onClick={() => setOpen(true)}
-              style={{
-                animation: "chatBotFloat 3.2s ease-in-out infinite",
-                border: "3px solid hsla(263,80%,62%,0.6)",
-                boxShadow: "0 0 0 6px hsla(263,80%,62%,0.12), 0 8px 32px hsla(263,80%,50%,0.35)",
-                background: "hsla(263,80%,62%,0.06)",
-              }}
+              style={{ animation: "chatBotFloat 3.2s ease-in-out infinite" }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/bot-avatar.png"
                 alt="Abrir chat"
-                className="w-[85%] h-[85%] object-contain"
-                style={{ filter: "drop-shadow(0 4px 12px hsla(263,80%,62%,0.4))" }}
+                className="w-full h-full object-contain"
+                style={{ filter: "drop-shadow(0 4px 16px hsla(263,80%,62%,0.45))" }}
               />
             </div>
           </div>
