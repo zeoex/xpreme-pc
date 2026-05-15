@@ -15,10 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Aplica el tema antes de que React hidrate — evita flash */}
         <script dangerouslySetInnerHTML={{ __html: `
           (function(){
-            var t = localStorage.getItem('xpreme-theme');
-            var isDark = t !== 'light';
-            document.documentElement.classList.toggle('dark', isDark);
-            document.documentElement.classList.toggle('light', !isDark);
+            if (localStorage.getItem('xpreme-theme') === 'dark')
+              document.documentElement.classList.add('dark');
           })();
         `}} />
       </head>

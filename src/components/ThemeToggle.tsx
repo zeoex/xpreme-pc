@@ -3,25 +3,17 @@ import { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
 export default function ThemeToggle() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("xpreme-theme");
-    const isDark = stored !== "light";
-    apply(isDark);
+    const isDark = document.documentElement.classList.contains("dark");
     setDark(isDark);
   }, []);
-
-  function apply(isDark: boolean) {
-    const root = document.documentElement;
-    root.classList.toggle("dark", isDark);
-    root.classList.toggle("light", !isDark);
-  }
 
   const toggle = () => {
     const next = !dark;
     setDark(next);
-    apply(next);
+    document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("xpreme-theme", next ? "dark" : "light");
   };
 
@@ -32,8 +24,8 @@ export default function ThemeToggle() {
       title={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
       className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
       style={{
-        background: "hsla(263,80%,62%,0.15)",
-        border: "1px solid hsla(263,80%,62%,0.35)",
+        background: "hsla(263,75%,50%,0.12)",
+        border: "1px solid hsla(263,75%,50%,0.3)",
         color: "hsl(var(--primary))",
       }}
     >
