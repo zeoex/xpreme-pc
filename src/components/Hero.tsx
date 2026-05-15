@@ -4,6 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Terminal, Cpu, Server, Shield } from "lucide-react";
+import MatrixRain from "@/components/MatrixRain";
 
 const words = ["Software", "Sistemas", "Redes", "Soluciones"];
 
@@ -25,12 +26,19 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center pt-16 circuit-bg overflow-hidden"
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+      style={{ background: "hsl(224,71%,4%)" }}
     >
-      {/* Background glow */}
+      {/* Matrix rain background */}
+      <MatrixRain />
+
+      {/* Glow blobs encima del matrix — dan profundidad */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px]" style={{ background: "hsla(199,89%,48%,0.08)" }} />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full blur-[140px]" style={{ background: "hsla(199,89%,48%,0.07)" }} />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: "hsla(199,89%,48%,0.05)" }} />
+        {/* Vignette lateral izquierda para que el texto sea legible */}
+        <div className="absolute inset-y-0 left-0 w-1/2" style={{ background: "linear-gradient(to right, rgba(6,8,18,0.85) 0%, transparent 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(6,8,18,0.4) 0%, transparent 30%, transparent 70%, rgba(6,8,18,0.6) 100%)" }} />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
