@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Clock, Users, Wrench, ShieldCheck, Headphones, Code2 } from "lucide-react";
 
 const values = [
   "Respuesta rápida: atendemos dentro de las 2 horas",
@@ -68,17 +68,29 @@ export default function About() {
               ))}
             </div>
 
-            {/* Code block decoration */}
-            <div className="bg-card border border-border rounded-xl p-5 font-mono text-sm">
-              <div className="text-muted-foreground text-xs mb-3">{'// xpreme-pc.config.ts'}</div>
-              <div className="space-y-1">
-                <div><span className="text-blue-400">const</span> <span className="text-primary">xpreme</span> <span className="text-foreground">= {"{"}</span></div>
-                <div className="pl-4"><span className="text-yellow-400">soporte</span>: <span className="text-green-400">&apos;24/7&apos;</span><span className="text-foreground">,</span></div>
-                <div className="pl-4"><span className="text-yellow-400">respuesta</span>: <span className="text-green-400">&apos;2h&apos;</span><span className="text-foreground">,</span></div>
-                <div className="pl-4"><span className="text-yellow-400">garantia</span>: <span className="text-green-400">true</span><span className="text-foreground">,</span></div>
-                <div className="pl-4"><span className="text-yellow-400">experiencia</span>: <span className="text-green-400">&apos;10+ años&apos;</span></div>
-                <div><span className="text-foreground">{"}"}</span></div>
-              </div>
+            {/* Feature pills grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { icon: Clock,       label: "Respuesta en 2h",    desc: "Atención rápida" },
+                { icon: Headphones,  label: "Soporte 24/7",       desc: "Siempre disponible" },
+                { icon: ShieldCheck, label: "Garantía incluida",  desc: "Sin costos ocultos" },
+                { icon: Code2,       label: "Software a medida",  desc: "Desarrollo propio" },
+                { icon: Users,       label: "Empresas y Pymes",   desc: "Cualquier tamaño" },
+                { icon: Wrench,      label: "Técnicos cert.",     desc: "10+ años exp." },
+              ].map(({ icon: Icon, label, desc }) => (
+                <div
+                  key={label}
+                  className="flex items-start gap-3 p-3 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-foreground leading-tight">{label}</p>
+                    <p className="text-[11px] text-muted-foreground mt-0.5">{desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
