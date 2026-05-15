@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { X, Send, Bot, User, Zap, ChevronDown, Sparkles } from "lucide-react";
+import { X, Send, User, ChevronDown } from "lucide-react";
 
 interface Message {
   id: number;
@@ -16,7 +16,32 @@ function genSessionId() {
   return "sess_" + Math.random().toString(36).slice(2, 11);
 }
 
-/* ── Typing indicator: tres puntos que rebotan ── */
+/* ── Robot avatar: imagen del mascot con fallback ── */
+function BotAvatar({ size = 32 }: { size?: number }) {
+  const [err, setErr] = useState(false);
+  if (err) {
+    return (
+      <div
+        style={{ width: size, height: size }}
+        className="rounded-full bg-card border border-primary/40 flex items-center justify-center flex-shrink-0"
+      >
+        <span style={{ fontSize: size * 0.45 }}>🤖</span>
+      </div>
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/bot-avatar.png"
+      alt="Asistente"
+      onError={() => setErr(true)}
+      style={{ width: size, height: size, objectFit: "contain", objectPosition: "center bottom" }}
+      className="rounded-full bg-white flex-shrink-0"
+    />
+  );
+}
+
+/* ── Typing indicator ── */
 function TypingDots() {
   return (
     <div className="flex items-center gap-1 px-1 py-0.5">
@@ -34,7 +59,7 @@ function TypingDots() {
   );
 }
 
-/* ── Burbuja individual con animación de entrada ── */
+/* ── Bubble ── */
 function Bubble({ msg, onSuggestion }: { msg: Message; onSuggestion: (s: string) => void }) {
   const isUser = msg.role === "user";
   return (
@@ -45,20 +70,17 @@ function Bubble({ msg, onSuggestion }: { msg: Message; onSuggestion: (s: string)
       }}
     >
       {/* Avatar */}
-      <div
-        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center self-end ${
-          isUser
-            ? "bg-primary/20 border border-primary/30"
-            : "bg-card border border-primary/40"
-        }`}
-      >
-        {isUser
-          ? <User className="w-4 h-4 text-primary" />
-          : <Bot className="w-4 h-4 text-primary" />}
-      </div>
+      {isUser ? (
+        <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center self-end bg-primary/20 border border-primary/30">
+          <User className="w-4 h-4 text-primary" />
+        </div>
+      ) : (
+        <div className="self-end flex-shrink-0">
+          <BotAvatar size={32} />
+        </div>
+      )}
 
       <div className={`flex flex-col gap-2 max-w-[78%] ${isUser ? "items-end" : "items-start"}`}>
-        {/* Bubble */}
         <div
           className={`px-4 py-2.5 text-sm leading-relaxed ${
             isUser
@@ -109,7 +131,6 @@ export default function ChatWidget() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  /* mount delay for button entrance animation */
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 600);
     return () => clearTimeout(t);
@@ -166,7 +187,6 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* ── CSS keyframes inline para evitar dependencias extra ── */}
       <style>{`
         @keyframes chatBounce {
           0%,80%,100% { transform: translateY(0); }
@@ -188,9 +208,9 @@ export default function ChatWidget() {
           from { opacity:0; transform: translateY(16px) scale(0.97); }
           to   { opacity:1; transform: translateY(0) scale(1); }
         }
-        @keyframes chatPulseRing {
-          0%   { transform: scale(1);    opacity:0.7; }
-          100% { transform: scale(1.55); opacity:0; }
+        @keyframes chatBotFloat {
+          0%,100% { transform: translateY(0px); }
+          50%      { transform: translateY(-6px); }
         }
         @keyframes chatBtnIn {
           from { opacity:0; transform: scale(0.5) translateY(16px); }
@@ -201,31 +221,21 @@ export default function ChatWidget() {
           70%  { transform: scale(1.25); }
           100% { transform: scale(1); }
         }
+        @keyframes chatGlow {
+          0%,100% { box-shadow: 0 0 18px 4px hsla(199,89%,48%,0.3); }
+          50%      { box-shadow: 0 0 32px 10px hsla(199,89%,48%,0.55); }
+        }
       `}</style>
 
-      {/* ── Floating button ── */}
+      {/* ── Floating button — robot mascot ── */}
       <div
         className="fixed bottom-6 right-6 z-50"
         style={mounted ? { animation: "chatBtnIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both" } : { opacity: 0 }}
       >
-        {/* Pulsing ring (only when closed) */}
-        {!open && (
-          <>
-            <span
-              className="absolute inset-0 rounded-full bg-primary"
-              style={{ animation: "chatPulseRing 2s ease-out infinite" }}
-            />
-            <span
-              className="absolute inset-0 rounded-full bg-primary"
-              style={{ animation: "chatPulseRing 2s ease-out 0.7s infinite" }}
-            />
-          </>
-        )}
-
         {/* Unread badge */}
         {unread > 0 && !open && (
           <span
-            className="absolute -top-1 -right-1 z-10 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center shadow"
+            className="absolute -top-1 -right-1 z-20 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center shadow"
             style={{ animation: "chatBadgePop 0.3s cubic-bezier(0.34,1.56,0.64,1) both" }}
           >
             {unread}
@@ -235,20 +245,34 @@ export default function ChatWidget() {
         <button
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Cerrar chat" : "Abrir chat"}
-          className="relative z-10 w-14 h-14 rounded-full bg-primary text-white shadow-xl shadow-primary/40 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95"
-          style={{ boxShadow: "0 8px 32px hsla(199,89%,48%,0.45)" }}
+          className="relative z-10 w-16 h-16 rounded-full bg-white flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 overflow-hidden"
+          style={{
+            animation: !open ? "chatGlow 2.5s ease-in-out infinite" : "none",
+            boxShadow: open ? "0 4px 20px rgba(0,0,0,0.3)" : undefined,
+          }}
         >
+          {/* Robot image (visible when closed) */}
           <span
             className="absolute inset-0 flex items-center justify-center transition-all duration-300"
-            style={{ opacity: open ? 0 : 1, transform: open ? "rotate(90deg) scale(0.5)" : "rotate(0deg) scale(1)" }}
+            style={{
+              opacity: open ? 0 : 1,
+              transform: open ? "scale(0.5) rotate(90deg)" : "scale(1) rotate(0deg)",
+              animation: !open ? "chatBotFloat 3s ease-in-out infinite" : "none",
+            }}
           >
-            <Sparkles className="w-6 h-6" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/bot-avatar.png" alt="Chat" className="w-14 h-14 object-contain" />
           </span>
+
+          {/* Close icon (visible when open) */}
           <span
             className="absolute inset-0 flex items-center justify-center transition-all duration-300"
-            style={{ opacity: open ? 1 : 0, transform: open ? "rotate(0deg) scale(1)" : "rotate(-90deg) scale(0.5)" }}
+            style={{
+              opacity: open ? 1 : 0,
+              transform: open ? "scale(1) rotate(0deg)" : "scale(0.5) rotate(-90deg)",
+            }}
           >
-            <ChevronDown className="w-6 h-6" />
+            <ChevronDown className="w-6 h-6 text-primary" />
           </span>
         </button>
       </div>
@@ -256,7 +280,7 @@ export default function ChatWidget() {
       {/* ── Chat panel ── */}
       {open && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-[340px] sm:w-[380px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
+          className="fixed bottom-28 right-6 z-50 w-[340px] sm:w-[380px] rounded-2xl border border-border/70 bg-card flex flex-col overflow-hidden"
           style={{
             maxHeight: "540px",
             boxShadow: "0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px hsla(199,89%,48%,0.08)",
@@ -268,13 +292,10 @@ export default function ChatWidget() {
             className="flex items-center gap-3 px-4 py-3 border-b border-border/60 flex-shrink-0"
             style={{ background: "linear-gradient(135deg, hsl(222,47%,8%), hsl(220,40%,10%))" }}
           >
-            {/* Avatar con glow */}
+            {/* Bot avatar */}
             <div className="relative">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center border border-primary/40"
-                style={{ background: "radial-gradient(circle at 30% 30%, hsl(199,89%,30%), hsl(222,47%,10%))" }}
-              >
-                <Zap className="w-5 h-5 text-primary" />
+              <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center overflow-hidden flex-shrink-0">
+                <BotAvatar size={42} />
               </div>
               <span
                 className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-400 border-2 border-card"
@@ -307,12 +328,10 @@ export default function ChatWidget() {
             {/* Typing indicator */}
             {loading && (
               <div
-                className="flex gap-2.5"
+                className="flex gap-2.5 items-end"
                 style={{ animation: "chatSlideLeft 0.3s ease-out both" }}
               >
-                <div className="w-8 h-8 rounded-full flex items-center justify-center border border-primary/40 bg-card flex-shrink-0 self-end">
-                  <Bot className="w-4 h-4 text-primary" />
-                </div>
+                <BotAvatar size={32} />
                 <div className="bg-secondary rounded-2xl rounded-bl-sm border border-border/60 px-4 py-3">
                   <TypingDots />
                 </div>
@@ -342,9 +361,7 @@ export default function ChatWidget() {
               disabled={!input.trim() || loading}
               className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-200 active:scale-90"
               style={{
-                background: input.trim() && !loading
-                  ? "hsl(199,89%,48%)"
-                  : "hsl(217,32%,18%)",
+                background: input.trim() && !loading ? "hsl(199,89%,48%)" : "hsl(217,32%,18%)",
                 boxShadow: input.trim() && !loading ? "0 4px 16px hsla(199,89%,48%,0.4)" : "none",
                 color: "white",
               }}
